@@ -82,7 +82,7 @@
   </div>
 
   <script>
-    const correctCode = "274913"; // 🔑 Set your code here
+    const correctCode = "123489"; // 🔑 Set your code here
 
     // Handle button click
     document.getElementById("unlockBtn").addEventListener("click", checkCode);
@@ -99,13 +99,13 @@
 
       if (inputCode === correctCode) {
         messageBox.style.color = "#00ff88";
-        messageBox.innerText = "✅ Vault Unlocked!";
+        messageBox.innerText = "✅ Congratulations! Vault Unlocked!";
         setTimeout(() => {
           window.location.href = "congratulations.html";
         }, 1000); // Delay before redirect
       } else {
         messageBox.style.color = "#ff4d4d";
-        messageBox.innerText = "❌ Incorrect Code. Try Again!";
+        messageBox.innerText = "❌ Oops! Incorrect Code. Try Again!";
       }
     }
   </script>
