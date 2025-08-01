@@ -9,23 +9,32 @@
       background-color: #0c0c0c;
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
+      margin: 0;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
     }
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       color: #00f3ff;
+    }
+    .vaults-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .vault-box {
       background-color: #1c1c1c;
-      padding: 30px;
+      padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 0 15px #00f3ff;
+      box-shadow: 0 0 12px #00f3ff;
+      width: 280px;
       text-align: center;
+    }
+    .vault-box h2 {
+      margin-bottom: 15px;
     }
     label {
       display: block;
@@ -34,12 +43,12 @@
       color: #fff;
     }
     input[type="password"] {
-      font-size: 20px;
+      font-size: 18px;
       padding: 10px;
-      width: 200px;
+      width: 80%;
       border-radius: 10px;
       border: none;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-align: center;
       background: #222;
       color: #fff;
@@ -58,54 +67,63 @@
       background-color: #00c2cc;
     }
     .message {
-      margin-top: 15px;
-      font-size: 18px;
-      height: 24px;
+      margin-top: 10px;
+      font-size: 16px;
+      height: 22px;
     }
   </style>
 </head>
 <body>
-  <div class="vault-box">
-    <h1>Enter the Vault Code</h1>
-    <label for="vaultCode">Vault Code:</label>
-    <input 
-      type="password" 
-      id="vaultCode" 
-      maxlength="6" 
-      placeholder="●●●●●●" 
-      autocomplete="off"
-      autofocus
-    />
-    <br>
-    <button id="unlockBtn">Unlock Vault</button>
-    <div class="message" id="messageBox" aria-live="polite"></div>
+  <h1>🔐 Crack the Vaults</h1>
+  <div class="vaults-container">
+    <!-- Red Vault -->
+    <div class="vault-box" style="border-top: 4px solid red;">
+      <h2>🔴 Red Vault</h2>
+      <label for="redVaultCode">Enter Code:</label>
+      <input type="password" id="redVaultCode" maxlength="6" placeholder="●●●●●●" autocomplete="off">
+      <button onclick="checkCode('red')">Unlock</button>
+      <div class="message" id="message-red"></div>
+    </div>
+
+    <!-- Blue Vault -->
+    <div class="vault-box" style="border-top: 4px solid blue;">
+      <h2>🔵 Blue Vault</h2>
+      <label for="blueVaultCode">Enter Code:</label>
+      <input type="password" id="blueVaultCode" maxlength="6" placeholder="●●●●●●" autocomplete="off">
+      <button onclick="checkCode('blue')">Unlock</button>
+      <div class="message" id="message-blue"></div>
+    </div>
+
+    <!-- Yellow Vault -->
+    <div class="vault-box" style="border-top: 4px solid gold;">
+      <h2>🟡 Yellow Vault</h2>
+      <label for="yellowVaultCode">Enter Code:</label>
+      <input type="password" id="yellowVaultCode" maxlength="6" placeholder="●●●●●●" autocomplete="off">
+      <button onclick="checkCode('yellow')">Unlock</button>
+      <div class="message" id="message-yellow"></div>
+    </div>
   </div>
 
   <script>
-    const correctCode = "123456"; // 🔑 Set your code here
+    const vaultCodes = {
+      red: "527941",
+      blue: "735108",
+      yellow: "694231"
+    };
 
-    // Handle button click
-    document.getElementById("unlockBtn").addEventListener("click", checkCode);
-
-    // Handle Enter key
-    document.getElementById("vaultCode").addEventListener("keyup", function(e) {
-      if (e.key === "Enter") checkCode();
-    });
-
-    // Main code check logic
-    function checkCode() {
-      const inputCode = document.getElementById("vaultCode").value.trim();
-      const messageBox = document.getElementById("messageBox");
-
-      if (inputCode === correctCode) {
+    function checkCode(vault) {
+      const input = document.getElementById(`${vault}VaultCode`).value.trim();
+      const messageBox = document.getElementById(`message-${vault}`);
+      
+      if (input === vaultCodes[vault]) {
         messageBox.style.color = "#00ff88";
-        messageBox.innerText = "✅ Congratulations! Vault Unlocked!";
+        messageBox.innerText = "✅ Vault Unlocked!";
         setTimeout(() => {
-          window.location.href = "congratulations.html";
-        }, 1000); // Delay before redirect
+          window.location.href = `${vault}-vault.html`;
+        }, 1000);
       } else {
         messageBox.style.color = "#ff4d4d";
-        messageBox.innerText = "❌ Oops! Incorrect Code. Try Again!";
+        messageBox.innerText = "❌ Incorrect Code!";
       }
     }
   </script>
